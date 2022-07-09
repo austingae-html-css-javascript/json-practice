@@ -2,9 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home({motherInfo, kittenInfo}) {
-  console.log(motherInfo);
-  console.log(kittenInfo);
+export default function Home({countryNameList}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -15,15 +13,16 @@ export default function Home({motherInfo, kittenInfo}) {
 
       <main>
         {
-          motherInfo.map((catName) => {
+          countryNameList.map((country) => {
+            console.log(country);
             return (
-              <h3>{catName}</h3>
+              <div>
+                <h4 style={{display: "inline-block"}}>{country.countryName}</h4>
+                <p style={{display: "inline-block"}}>{country.countryNameInKR}</p>
+              </div>
             );
           })
         }
-        <p>Number of Kittens: {kittenInfo[0]}</p>
-        <p>Number of Male Kittens: {kittenInfo[1]}</p>
-        <p>Number of Female Kittens: {kittenInfo[2]}</p>
       </main>
     </div>
   )
@@ -31,32 +30,23 @@ export default function Home({motherInfo, kittenInfo}) {
 
 export async function getStaticProps(context) {
 
-  let response = await fetch("https://raw.githubusercontent.com/mdn/learning-area/main/javascript/oojs/tasks/json/sample.json");
+  let response = await fetch("https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json");
   let data = await response.json();
 
-  let motherInfo = [];
-  data.forEach((cat) => {
-    motherInfo.push(cat.name);
-  }) 
-
-  let kittenInfo = [0, 0, 0]; //number of kittens, number of male kittens, number of female kittens
-  data.forEach((cat) => {
-    kittenInfo[0] = kittenInfo[0] + cat.kittens.length; //adding up the number of kittens
-
-    (cat.kittens).forEach((kitten) => {
-      if (kitten.gender == "m") {
-        kittenInfo[1] = kittenInfo[1] + 1;
+  let countryNameList = [];
+  data.forEach((country) => {
+    countryNameList.push(
+      {
+        countryName: country.name,
+        countryNameInKR: country.translations.kr,
       }
-      else if (kitten.gender == "f") {
-        kittenInfo[2] = kittenInfo[2] + 1;
-      }
-    })
-  })
-  
+    )
+  });
+
+
   return {
     props: {
-      motherInfo: motherInfo,
-      kittenInfo: kittenInfo,
+      countryNameList: countryNameList,
     }
   }
 }
