@@ -19,8 +19,9 @@ export default function Home({}) {
 
 export async function getStaticProps(context) {
 
+  let response = await fetch("https://raw.githubusercontent.com/austingae/json-practice/main/JSON/world-leaders.json");
+  let data = await response.json();
   
-  console.log(data);
   return {
     props: {
     }

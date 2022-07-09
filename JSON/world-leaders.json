@@ -1,5 +1,30 @@
 {
   "subject": "world leaders",
   "year": "2022",
-  "worldLeaders": ["Joe Biden", "Xi Jinping", "Zelensky"]
+  "worldLeaders": [
+    {
+      "name": "Joe Biden",
+      "country": "US"
+    }, 
+    {
+      "name": "Justin Trudeau",
+      "country": "Canada"
+    },
+    {
+      "name": "Andres Manuel Lopez Obrador",
+      "country": "Mexico"
+    }, 
+    {
+      "name": "Emmanuel Macron",
+      "country": "France"
+    }, 
+    {
+      "name": "윤석열",
+      "country": "South Korea"
+    },
+    {
+      "name": "Olaf Scholz",
+      "country": "Germany"
+    }
+  ]
 }
