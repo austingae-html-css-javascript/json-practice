@@ -2,7 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home({}) {
+export default function Home({motherInfo, kittenInfo}) {
+  console.log(motherInfo);
+  console.log(kittenInfo);
   return (
     <div className={styles.container}>
       <Head>
@@ -12,6 +14,16 @@ export default function Home({}) {
       </Head>
 
       <main>
+        {
+          motherInfo.map((catName) => {
+            return (
+              <h3>{catName}</h3>
+            );
+          })
+        }
+        <p>Number of Kittens: {kittenInfo[0]}</p>
+        <p>Number of Male Kittens: {kittenInfo[1]}</p>
+        <p>Number of Female Kittens: {kittenInfo[2]}</p>
       </main>
     </div>
   )
@@ -19,11 +31,32 @@ export default function Home({}) {
 
 export async function getStaticProps(context) {
 
-  let response = await fetch("https://raw.githubusercontent.com/austingae/json-practice/main/JSON/world-leaders.json");
+  let response = await fetch("https://raw.githubusercontent.com/mdn/learning-area/main/javascript/oojs/tasks/json/sample.json");
   let data = await response.json();
+
+  let motherInfo = [];
+  data.forEach((cat) => {
+    motherInfo.push(cat.name);
+  }) 
+
+  let kittenInfo = [0, 0, 0]; //number of kittens, number of male kittens, number of female kittens
+  data.forEach((cat) => {
+    kittenInfo[0] = kittenInfo[0] + cat.kittens.length; //adding up the number of kittens
+
+    (cat.kittens).forEach((kitten) => {
+      if (kitten.gender == "m") {
+        kittenInfo[1] = kittenInfo[1] + 1;
+      }
+      else if (kitten.gender == "f") {
+        kittenInfo[2] = kittenInfo[2] + 1;
+      }
+    })
+  })
   
   return {
     props: {
+      motherInfo: motherInfo,
+      kittenInfo: kittenInfo,
     }
   }
 }
