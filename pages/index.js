@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -12,7 +12,6 @@ export default function Home() {
       </Head>
 
       <main>
-
       </main>
     </div>
   )
@@ -20,13 +19,21 @@ export default function Home() {
 
 export async function getStaticProps(context) {
 
-  const response = await fetch("../JSON/squad.json");
-  const response2 = await response.json();
-
-  console.log(response2);
+  
+  console.log(data);
   return {
     props: {
-
     }
   }
 }
+
+/*
+https://www.codegrepper.com/code-examples/javascript/async%2Fawait+to+fetch+the+json+data
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON#active_learning_working_through_a_json_example
+
+*/
+
+/*
+JSON.parse(data) means turning data from string to Javascript object
+JSON.stringify(data) means turning data from Javascript object to string
+*/
