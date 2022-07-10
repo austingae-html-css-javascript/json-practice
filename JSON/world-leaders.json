@@ -41,6 +41,14 @@
     {
       "name": "Chamber",
       "country": "Valorant"
+    },
+    {
+      "name": "Captain Rex",
+      "country": "Star Wars"
+    },
+    {
+      "name": "Yoda",
+      "country": "Star Wars"
     }
   ]
 }
