@@ -14,7 +14,6 @@ export default function Home({countryNameList}) {
       <main>
         {
           countryNameList.map((country) => {
-            console.log(country);
             return (
               <div>
                 <h4 style={{display: "inline-block"}}>{country.countryName}</h4>
@@ -30,8 +29,9 @@ export default function Home({countryNameList}) {
 
 export async function getStaticProps(context) {
 
-  let response = await fetch("https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json");
-  let data = await response.json();
+  //The first two lines of code will allow you to use the JSON file right here!
+  let response = await fetch("https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json"); //fetch("...") fetches the JSON file
+  let data = await response.json(); //.json() takes JSON file as an input and produces a JS object
 
   let countryNameList = [];
   data.forEach((country) => {
@@ -42,7 +42,6 @@ export async function getStaticProps(context) {
       }
     )
   });
-
 
   return {
     props: {
