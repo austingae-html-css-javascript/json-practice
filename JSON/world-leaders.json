@@ -49,6 +49,10 @@
     {
       "name": "Yoda",
       "country": "Star Wars"
+    },
+    {
+      "name": "MR. FAT",
+      "country": "fatland"
     }
   ]
 }
